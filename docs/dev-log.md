@@ -12,6 +12,10 @@ Catatan harian proses pengembangan proyek ini. Berisi update harian, kendala tek
 - Membuat struktur folder komponen dan halaman
 - Membuat file `README.md` dan `db.json`
 - Commit awal menggunakan Git
+- Migrasi dari json-server lokal ke MockAPI online
+- Update seluruh fetch endpoint di komponen
+- API sekarang live di https://686bb03de559eba90873a0b5.mockapi.io
+
 
 ---
 
