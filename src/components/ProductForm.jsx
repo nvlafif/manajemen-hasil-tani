@@ -1,14 +1,22 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { API_URL } from "../constants";
 
-const ProductForm = ({ onAdd }) => {
+const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
   const [formData, setFormData] = useState({
     nama: "",
     kategori: "",
     harga: "",
     kuantitas: "",
   });
+
+  // Prefill form saat mode edit
+  useEffect(() => {
+    if (editingData) {
+      setFormData(editingData);
+    } else {
+      setFormData({ nama: "", kategori: "", harga: "", kuantitas: "" });
+    }
+  }, [editingData]);
 
   const handleChange = (e) => {
     setFormData({
@@ -20,27 +28,47 @@ const ProductForm = ({ onAdd }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...formData,
-        harga: Number(formData.harga),
-        kuantitas: Number(formData.kuantitas),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        onAdd(data); // trigger refresh data
-        setFormData({ nama: "", kategori: "", harga: "", kuantitas: "" });
-      });
+    const payload = {
+      ...formData,
+      harga: Number(formData.harga),
+      kuantitas: Number(formData.kuantitas),
+    };
+
+    if (editingData) {
+      // UPDATE / PUT
+      fetch(`${API_URL}/${editingData.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          onUpdate(); // Refresh data tabel
+          cancelEdit(); // Keluar dari mode edit
+        });
+    } else {
+      // CREATE / POST
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          onAdd(data); // Tambah data baru ke tabel
+          setFormData({ nama: "", kategori: "", harga: "", kuantitas: "" });
+        });
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-6 p-4 border rounded bg-white shadow">
-      <h2 className="text-lg font-semibold mb-4">Tambah Produk Baru</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="mb-6 p-4 border rounded bg-white shadow"
+    >
+      <h2 className="text-lg font-semibold mb-4">
+        {editingData ? "Edit Produk" : "Tambah Produk Baru"}
+      </h2>
       <div className="grid grid-cols-2 gap-4">
         <input
           className="p-2 border"
@@ -79,9 +107,27 @@ const ProductForm = ({ onAdd }) => {
           required
         />
       </div>
-      <button className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-        Tambah
-      </button>
+
+      <div className="mt-4 flex gap-3">
+        <button
+          type="submit"
+          className={`px-4 py-2 text-white rounded ${
+            editingData ? "bg-blue-600 hover:bg-blue-700" : "bg-green-600 hover:bg-green-700"
+          }`}
+        >
+          {editingData ? "Simpan Perubahan" : "Tambah"}
+        </button>
+
+        {editingData && (
+          <button
+            type="button"
+            className="px-4 py-2 border border-gray-400 rounded"
+            onClick={cancelEdit}
+          >
+            Batal
+          </button>
+        )}
+      </div>
     </form>
   );
 };
