@@ -20,6 +20,10 @@ Catatan harian proses pengembangan proyek ini. Berisi update harian, kendala tek
 - Tambah tombol Edit di tabel
 - Prefilled data ke form saat edit
 - Kirim update data menggunakan PUT ke MockAPI
+- Tambahkan tombol Hapus di setiap produk
+- Konfirmasi sebelum menghapus
+- Hapus data dari MockAPI dengan DELETE
+
 
 
 
