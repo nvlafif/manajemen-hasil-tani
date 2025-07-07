@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
-
 import { API_URL } from "../constants";
+import ProductForm from "./ProductForm";
 
 const ProductTable = () => {
   const [produk, setProduk] = useState([]);
 
-  useEffect(() => {
+  // ✅ Tambahkan fungsi ini!
+  const fetchProduk = () => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => setProduk(data))
       .catch((err) => console.error("Gagal fetch data:", err));
+  };
+
+  useEffect(() => {
+    fetchProduk();
   }, []);
 
   return (
     <div className="p-4">
+      <ProductForm onAdd={fetchProduk} /> {/* ← sekarang tidak error lagi */}
       <h2 className="text-xl font-semibold mb-4">Daftar Produk</h2>
       <table className="w-full border border-gray-300">
         <thead className="bg-gray-100">
