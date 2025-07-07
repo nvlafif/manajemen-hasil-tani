@@ -25,6 +25,20 @@ const ProductTable = () => {
     setEditingData(null); // Keluar dari mode edit
   };
 
+  const handleDelete = (id) => {
+    const yakin = window.confirm("Yakin ingin menghapus produk ini?");
+    if (!yakin) return;
+
+    fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+    })
+        .then((res) => res.json())
+        .then(() => {
+        fetchProduk(); // Refresh data
+        });
+    };
+
+
   return (
     <div className="p-4">
       <ProductForm
@@ -47,23 +61,29 @@ const ProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          {produk.map((item) => (
-            <tr key={item.id}>
-              <td className="p-2 border">{item.id}</td>
-              <td className="p-2 border">{item.nama}</td>
-              <td className="p-2 border">{item.kategori}</td>
-              <td className="p-2 border">Rp {item.harga.toLocaleString()}</td>
-              <td className="p-2 border">{item.kuantitas}</td>
-              <td className="p-2 border">
-                <button
-                  className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
-                  onClick={() => handleEdit(item)}
-                >
-                  Edit
-                </button>
-              </td>
-            </tr>
-          ))}
+            {produk.map((item) => (
+                <tr key={item.id}>
+                <td className="p-2 border">{item.id}</td>
+                <td className="p-2 border">{item.nama}</td>
+                <td className="p-2 border">{item.kategori}</td>
+                <td className="p-2 border">Rp {item.harga.toLocaleString()}</td>
+                <td className="p-2 border">{item.kuantitas}</td>
+                <td className="p-2 border flex gap-2">
+                    <button
+                    className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+                    onClick={() => handleEdit(item)}
+                    >
+                    Edit
+                    </button>
+                    <button
+                    className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700"
+                    onClick={() => handleDelete(item.id)}
+                    >
+                    Hapus
+                    </button>
+                </td>
+                </tr>
+            ))}
         </tbody>
       </table>
     </div>
