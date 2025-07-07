@@ -1,0 +1,18 @@
+{
+  "produk": [
+    {
+      "id": 1,
+      "nama": "Padi",
+      "kategori": "Beras",
+      "harga": 15000,
+      "kuantitas": 10
+    },
+    {
+      "id": 2,
+      "nama": "Jagung",
+      "kategori": "Biji-bijian",
+      "harga": 12000,
+      "kuantitas": 25
+    }
+  ]
+}
