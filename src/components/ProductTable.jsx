@@ -39,7 +39,7 @@ const ProductTable = () => {
         cancelEdit={cancelEdit}
       />
 
-      <h2 className="text-xl font-bold text-gray-800 mb-4">📦 Daftar Produk</h2>
+      <h2 className="text-xl font-bold text-gray-800 mb-4">Daftar Produk</h2>
       <div className="overflow-x-auto rounded-xl shadow border border-gray-200">
             <table className="min-w-full text-sm text-left bg-white text-gray-700">
                 <thead className="bg-white text-gray-700 border-b font-semibold text-sm">
@@ -68,19 +68,19 @@ const ProductTable = () => {
                         className="bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium py-1 px-2 rounded"
                         onClick={() => alert(JSON.stringify(item, null, 2))} // sementara alert dulu
                         >
-                        🔍 Details
+                        Details
                         </button>
                         <button
                         className="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-medium py-1 px-2 rounded"
                         onClick={() => handleEdit(item)}
                         >
-                        ✏️ Edit
+                        Edit
                         </button>
                         <button
                         className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-2 rounded"
                         onClick={() => handleDelete(item.id)}
                         >
-                        ❌ Delete
+                        Delete
                         </button>
                     </td>
                     </tr>
@@ -92,7 +92,7 @@ const ProductTable = () => {
                         colSpan="6"
                         className="text-center py-6 text-gray-400 italic bg-gray-50"
                     >
-                        Belum ada produk 😢
+                        Belum ada produk
                     </td>
                     </tr>
                 )}
