@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { API_URL } from "../constants";
 import ProductForm from "./ProductForm";
+import PopupDelete from "./PopupDelete";
+
+
+
 
 const ProductTable = () => {
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
   const [produk, setProduk] = useState([]);
   const [editingData, setEditingData] = useState(null);
 
@@ -20,15 +28,23 @@ const ProductTable = () => {
   const handleEdit = (item) => setEditingData(item);
   const cancelEdit = () => setEditingData(null);
 
-  const handleDelete = (id) => {
-    if (window.confirm("Yakin ingin menghapus produk ini?")) {
-      fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then(() => fetchProduk());
-    }
+  const confirmDelete = (id) => {
+    setSelectedId(id);
+    setShowDeleteModal(true);
   };
+
+const handleDeleteConfirmed = () => {
+  fetch(`${API_URL}/${selectedId}`, {
+    method: "DELETE",
+  })
+    .then((res) => res.json())
+    .then(() => {
+      fetchProduk();
+      setShowDeleteModal(false);
+      setSelectedId(null);
+    });
+};
+
 
   return (
     <div className="p-4 bg-white rounded-xl shadow-md">
@@ -71,7 +87,7 @@ const ProductTable = () => {
                         </button>
                         <button
                         className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-2 rounded"
-                        onClick={() => handleDelete(item.id)}>
+                        onClick={() => confirmDelete(item.id)}>
                           Delete
                         </button>
                     </td>
@@ -90,6 +106,13 @@ const ProductTable = () => {
                 )}
                 </tbody>
             </table>
+            {showDeleteModal && (
+              <PopupDelete
+                onConfirm={handleDeleteConfirmed}
+                onCancel={() => setShowDeleteModal(false)}
+              />
+            )}
+
         </div>
         
 

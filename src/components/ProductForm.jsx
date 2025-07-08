@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { API_URL } from "../constants";
 
+
 const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
   const [formData, setFormData] = useState({
     nama: "",
@@ -27,6 +28,17 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validasi sederhana
+    if (!formData.nama || !formData.kategori || !formData.harga || !formData.kuantitas) {
+      alert("Semua field wajib diisi!");
+      return;
+    }
+
+    if (formData.harga <= 0 || formData.kuantitas <= 0) {
+      alert("Harga dan kuantitas harus lebih dari 0!");
+      return;
+    }
 
     const payload = {
       ...formData,
@@ -123,7 +135,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
         {editingData && (
           <button
             type="button"
-            className="px-4 py-2 border border-gray-400 rounded"
+            className="px-4 py-2 border border-gray-400 rounded-[0.8rem] "
             onClick={cancelEdit}
           >
             Batal
