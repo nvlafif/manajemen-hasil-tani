@@ -61,17 +61,19 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
     }
   };
 
+  const inputClass = "p-2 border rounded-[0.8rem] border-black/50";
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 p-4 border rounded bg-white shadow"
+      className="mb-6 p-4 border rounded-[1rem] bg-white shadow"
     >
       <h2 className="text-lg font-semibold mb-4">
         {editingData ? "Edit Produk" : "Tambah Produk Baru"}
       </h2>
       <div className="grid grid-cols-2 gap-4">
         <input
-          className="p-2 border"
+          className={`${inputClass}`}
           type="text"
           name="nama"
           placeholder="Nama Produk"
@@ -80,7 +82,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
           required
         />
         <input
-          className="p-2 border"
+          className={`${inputClass}`}
           type="text"
           name="kategori"
           placeholder="Kategori"
@@ -89,7 +91,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
           required
         />
         <input
-          className="p-2 border"
+          className={`${inputClass}`}
           type="number"
           name="harga"
           placeholder="Harga"
@@ -98,7 +100,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
           required
         />
         <input
-          className="p-2 border"
+          className={`${inputClass}`}
           type="number"
           name="kuantitas"
           placeholder="Kuantitas"
@@ -111,7 +113,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
       <div className="mt-4 flex gap-3">
         <button
           type="submit"
-          className={`px-4 py-2 text-white rounded ${
+          className={`rounded-[0.8rem] px-4 py-2 text-white ${
             editingData ? "bg-blue-600 hover:bg-blue-700" : "bg-green-600 hover:bg-green-700"
           }`}
         >

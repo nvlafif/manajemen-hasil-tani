@@ -62,25 +62,17 @@ const ProductTable = () => {
                     <td className="px-4 py-2">{item.nama}</td>
                     <td className="px-4 py-2">{item.kategori}</td>
                     <td className="px-4 py-2">Rp {item.harga.toLocaleString()}</td>
-                    <td className="px-4 py-2">{item.kuantitas}</td>
+                    <td className="px-4 py-2">{item.kuantitas} Kg</td>
                     <td className="px-4 py-2 text-center space-x-2">
                         <button
-                        className="bg-sky-600 hover:bg-sky-700 text-white text-xs font-medium py-1 px-2 rounded"
-                        onClick={() => alert(JSON.stringify(item, null, 2))} // sementara alert dulu
-                        >
-                        Details
-                        </button>
-                        <button
                         className="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-medium py-1 px-2 rounded"
-                        onClick={() => handleEdit(item)}
-                        >
-                        Edit
+                        onClick={() => handleEdit(item)}>
+                          Edit
                         </button>
                         <button
                         className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-2 rounded"
-                        onClick={() => handleDelete(item.id)}
-                        >
-                        Delete
+                        onClick={() => handleDelete(item.id)}>
+                          Delete
                         </button>
                     </td>
                     </tr>
