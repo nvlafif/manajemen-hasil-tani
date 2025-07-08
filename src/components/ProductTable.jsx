@@ -37,21 +37,23 @@ const ProductTable = () => {
     setShowDeleteModal(true);
   };
 
-const handleDeleteConfirmed = () => {
-  fetch(`${API_URL}/${selectedId}`, {
-    method: "DELETE",
-  })
-    .then((res) => res.json())
-    .then(() => {
-      fetchProduk();
-      setShowDeleteModal(false);
-      setSelectedId(null);
-    });
-};
+  const handleDeleteConfirmed = () => {
+    fetch(`${API_URL}/${selectedId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        fetchProduk();
+        setShowDeleteModal(false);
+        setSelectedId(null);
+      });
+  };
+
+  const thClass = 'text-[0.9rem] w-fit h-[50px] px-2 sm:w-auto sm:h-auto sm:text-[1rem] sm:px-4 sm:py-3';
 
 
   return (
-    <div className="p-4 bg-white rounded-xl shadow-md">
+    <div className=" p-4 bg-white rounded-xl shadow-md">
       <ProductForm
         onAdd={fetchProduk}
         onUpdate={fetchProduk}
@@ -60,16 +62,16 @@ const handleDeleteConfirmed = () => {
       />
 
       <h2 className="text-xl font-bold text-gray-800 mb-4">Daftar Produk</h2>
-      <div className="overflow-x-auto rounded-xl shadow border border-gray-200">
-            <table className="min-w-full text-sm text-left bg-white text-gray-700">
+      <div className=" overflow-x-auto rounded-xl shadow border border-gray-500 ">
+            <table className=" min-w-full text-sm text-left text-gray-700">
                 <thead className="bg-white text-gray-700 border-b font-semibold text-sm">
                 <tr>
-                    <th className="px-4 py-3">ID</th>
-                    <th className="px-4 py-3">Nama</th>
-                    <th className="px-4 py-3">Kategori</th>
-                    <th className="px-4 py-3">Harga</th>
-                    <th className="px-4 py-3">Kuantitas</th>
-                    <th className="px-4 py-3 text-center">Aksi</th>
+                    <th className={`${thClass}`}>ID</th>
+                    <th className={`${thClass}`}>Nama</th>
+                    <th className={`${thClass}`}>Kategori</th>
+                    <th className={`${thClass}`}>Harga</th>
+                    <th className={`${thClass}`}>Kuantitas</th>
+                    <th className={`${thClass} text-center` }>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,9 +90,9 @@ const handleDeleteConfirmed = () => {
                         <td className="px-4 py-2">{i + 1}</td>
                         <td className="px-4 py-2">{item.nama}</td>
                         <td className="px-4 py-2">{item.kategori}</td>
-                        <td className="px-4 py-2">Rp {item.harga.toLocaleString()}</td>
-                        <td className="px-4 py-2">{item.kuantitas}</td>
-                        <td className="px-4 py-2 text-center space-x-2">
+                        <td className="px-4 md:p-4 md:w-auto py-2">Rp {item.harga.toLocaleString()}</td>
+                        <td className="px-4 py-2">{item.kuantitas} Kg</td>
+                        <td className="px-4 py-2 text-center md:space-x-2 space-y-2">
                           <button
                             className="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-medium py-1 px-2 rounded"
                             onClick={() => handleEdit(item)}
@@ -99,7 +101,7 @@ const handleDeleteConfirmed = () => {
                           </button>
                           <button
                             className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-2 rounded"
-                            onClick={() => handleDelete(item.id)}
+                            onClick={() => confirmDelete(item.id)}
                           >
                             Delete
                           </button>

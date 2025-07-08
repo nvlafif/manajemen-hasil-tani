@@ -73,7 +73,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
     }
   };
 
-  const inputClass = "p-2 border rounded-[0.8rem] border-black/50";
+  const inputClass = "p-2 border rounded-[0.8rem] border-black/50 text-[0.6rem] sm:text-[1rem]";
 
   return (
     <form
@@ -125,7 +125,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
       <div className="mt-4 flex gap-3">
         <button
           type="submit"
-          className={`rounded-[0.8rem] px-4 py-2 text-white ${
+          className={`text-[0.6rem] sm:text-[1rem] rounded-[0.8rem] px-4 py-2 text-white ${
             editingData ? "bg-blue-600 hover:bg-blue-700" : "bg-green-600 hover:bg-green-700"
           }`}
         >
@@ -135,7 +135,7 @@ const ProductForm = ({ onAdd, onUpdate, editingData, cancelEdit }) => {
         {editingData && (
           <button
             type="button"
-            className="px-4 py-2 border border-gray-400 rounded-[0.8rem] "
+            className="text-[0.6rem] sm:text-[1rem] px-4 py-2 border border-gray-400 rounded-[0.8rem] "
             onClick={cancelEdit}
           >
             Batal
