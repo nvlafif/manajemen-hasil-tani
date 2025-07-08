@@ -34,6 +34,7 @@ Mengambil semua data produk.
     Content-Type: application/json
    
     **Response**
+     ```json
     {
         "nama": "Cabai",
         "kategori": "Sayur",
@@ -41,9 +42,10 @@ Mengambil semua data produk.
         "kuantitas": 10
     }
 
-3.  PUT /produk/1
+4.  PUT /produk/1
     Content-Type: application/json
     **Response**
+     ```json
 
     {
         "nama": "Cabai Merah",
@@ -51,7 +53,7 @@ Mengambil semua data produk.
         "harga": 16000,
         "kuantitas": 12
     }
-4.  DELETE /produk/1
+6.  DELETE /produk/1
 
 Catatan
 - Endpoint ini tidak memerlukan autentikasi (public access)
