@@ -54,3 +54,4 @@ npm install
 
 # Jalankan di lokal
 npm run dev
++ ```
