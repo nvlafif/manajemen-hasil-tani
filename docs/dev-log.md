@@ -24,11 +24,27 @@ Catatan harian proses pengembangan proyek ini. Berisi update harian, kendala tek
 - Konfirmasi sebelum menghapus
 - Hapus data dari MockAPI dengan DELETE
 
+## 🗓️ 08 Juli 2025 — Setup Awal Proyek
 
+- Menambahkan validasi pada form input produk.
+- Menambahkan tampilan loading state saat fetch data produk.
+- Melakukan styling tambahan agar UI tabel lebih menarik dan profesional (menggunakan Tailwind CSS).
+- Membuat konfirmasi modal untuk fitur hapus produk.
+- Menyempurnakan tampilan website agar responsive terhadap smartphone dan tablet.
+- Menyelesaikan semua fitur CRUD (Create, Read, Update, Delete).
+- Mengatur koneksi Git: push branch dev ke GitHub, kemudian merge ke main.
+- Membuat repository publik di GitHub dan menyusun struktur branch dev dan main.
+- Deploy aplikasi ke Vercel dari branch main.
+- Menyusun dan melengkapi file README.md sebagai dokumentasi utama proyek.
+- Mengatur default branch ke main di GitHub agar siap ditampilkan kepada rekruter/magang.
+  
 
+✍️ Catatan Tambahan
+Proyek selesai 100% sesuai dengan checklist portofolio magang.
 
----
+Branch utama main sudah siap untuk dikirim ke rekruter.
 
-## 🧠 Catatan
-- Tailwind versi 4.1.11 membutuhkan konfigurasi PostCSS terbaru
-- Masalah "module is not defined" karena mode ES module → solusi: rename `postcss.config.js` ke `.cjs`
+File dokumentasi dan struktur folder telah disusun secara rapi.
+
+Seluruh fitur berjalan lancar di Vercel deployment.
+
