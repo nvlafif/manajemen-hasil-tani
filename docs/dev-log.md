@@ -14,7 +14,7 @@ Catatan harian proses pengembangan proyek ini. Berisi update harian, kendala tek
 - Commit awal menggunakan Git
 - Migrasi dari json-server lokal ke MockAPI online
 - Update seluruh fetch endpoint di komponen
-- API sekarang live di https://686bb03de559eba90873a0b5.mockapi.io
+- API sekarang live di https://686bb03de559eba90873a0b5.mockapi.io/produk
 - Buat komponen daftar produk dan tampilkan data dari json-server.
 - Buat form input produk baru dan hubungkan dengan API untuk menambahkan data
 - Tambah tombol Edit di tabel
