@@ -8,6 +8,8 @@ import PopupDelete from "./PopupDelete";
 
 const ProductTable = () => {
 
+  const [loading, setLoading] = useState(false);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -15,10 +17,12 @@ const ProductTable = () => {
   const [editingData, setEditingData] = useState(null);
 
   const fetchProduk = () => {
+    setLoading(true);
     fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => setProduk(data))
-      .catch((err) => console.error("Gagal fetch data:", err));
+    .then((res) => res.json())
+    .then((data) => setProduk(data))
+    .catch((err) => console.error("Gagal fetch data:", err))
+    .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -69,41 +73,46 @@ const handleDeleteConfirmed = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {produk.map((item, i) => (
-                    <tr
-                    key={item.id}
-                    className="border-b hover:bg-gray-50 transition duration-150"
-                    >
-                    <td className="px-4 py-2">{i + 1}</td>
-                    <td className="px-4 py-2">{item.nama}</td>
-                    <td className="px-4 py-2">{item.kategori}</td>
-                    <td className="px-4 py-2">Rp {item.harga.toLocaleString()}</td>
-                    <td className="px-4 py-2">{item.kuantitas} Kg</td>
-                    <td className="px-4 py-2 text-center space-x-2">
-                        <button
-                        className="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-medium py-1 px-2 rounded"
-                        onClick={() => handleEdit(item)}>
-                          Edit
-                        </button>
-                        <button
-                        className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-2 rounded"
-                        onClick={() => confirmDelete(item.id)}>
-                          Delete
-                        </button>
-                    </td>
-                    </tr>
-                ))}
-
-                {produk.length === 0 && (
+                  {loading ? (
                     <tr>
-                    <td
-                        colSpan="6"
-                        className="text-center py-6 text-gray-400 italic bg-gray-50"
-                    >
-                        Belum ada produk
-                    </td>
+                      <td colSpan="6" className="text-center py-8 text-blue-500 font-semibold animate-pulse">
+                        ⏳ Memuat data produk...
+                      </td>
                     </tr>
-                )}
+                  ) : produk.length > 0 ? (
+                    produk.map((item, i) => (
+                      <tr
+                        key={item.id}
+                        className="border-b hover:bg-gray-50 transition duration-150"
+                      >
+                        <td className="px-4 py-2">{i + 1}</td>
+                        <td className="px-4 py-2">{item.nama}</td>
+                        <td className="px-4 py-2">{item.kategori}</td>
+                        <td className="px-4 py-2">Rp {item.harga.toLocaleString()}</td>
+                        <td className="px-4 py-2">{item.kuantitas}</td>
+                        <td className="px-4 py-2 text-center space-x-2">
+                          <button
+                            className="bg-yellow-400 hover:bg-yellow-500 text-white text-xs font-medium py-1 px-2 rounded"
+                            onClick={() => handleEdit(item)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-2 rounded"
+                            onClick={() => handleDelete(item.id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="text-center py-6 text-gray-400 italic bg-gray-50">
+                        Belum ada produk 😢
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
             </table>
             {showDeleteModal && (
